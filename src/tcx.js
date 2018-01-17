@@ -3,7 +3,11 @@ import { NikeHelper } from './nikeHelper'
 import GeoLib from 'geolib'
 
 export class Tcx {
-  static ConvertFromNikeActivity(res) {
+  static ConvertFromNikeActivity(res, options) {
+    options = Object.assign({}, {
+      notes:'Generated on : nike.bullrox.net',
+      authorName:'Paul du Pavillon - https://nike.bullrox.net'
+    }, options);
     const data = res.data
     const elevations = NikeHelper.GetMetric(data, 'elevation')
     const latitudes = NikeHelper.GetMetric(data, 'latitude')
@@ -24,7 +28,7 @@ export class Tcx {
         Activities: {
           Activity: {
             '@Sport': 'Running',
-            'Notes': 'Generated on : nike.bullrox.net',
+            'Notes': options.notes,
             Id: new Date(data.start_epoch_ms).toISOString(),
             Lap: {
               '@StartTime':new Date(data.start_epoch_ms).toISOString(),
@@ -44,7 +48,7 @@ export class Tcx {
         },
         Author:{
           '@xsi:type':'Application_t',
-          Name:'Paul du Pavillon - https://nike.bullrox.net',
+          Name:options.authorName,
           Build:{
             Version: {
               VersionMajor:1,

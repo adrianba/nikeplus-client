@@ -28,7 +28,11 @@ var Tcx = exports.Tcx = function () {
 
   _createClass(Tcx, null, [{
     key: 'ConvertFromNikeActivity',
-    value: function ConvertFromNikeActivity(res) {
+    value: function ConvertFromNikeActivity(res, options) {
+      options = Object.assign({}, {
+        notes: 'Generated on : nike.bullrox.net',
+        authorName: 'Paul du Pavillon - https://nike.bullrox.net'
+      }, options);
       var data = res.data;
       var elevations = _nikeHelper.NikeHelper.GetMetric(data, 'elevation');
       var latitudes = _nikeHelper.NikeHelper.GetMetric(data, 'latitude');
@@ -49,7 +53,7 @@ var Tcx = exports.Tcx = function () {
           Activities: {
             Activity: {
               '@Sport': 'Running',
-              'Notes': 'Generated on : nike.bullrox.net',
+              'Notes': options.notes,
               Id: new Date(data.start_epoch_ms).toISOString(),
               Lap: {
                 '@StartTime': new Date(data.start_epoch_ms).toISOString(),
@@ -73,7 +77,7 @@ var Tcx = exports.Tcx = function () {
           },
           Author: {
             '@xsi:type': 'Application_t',
-            Name: 'Paul du Pavillon - https://nike.bullrox.net',
+            Name: options.authorName,
             Build: {
               Version: {
                 VersionMajor: 1,

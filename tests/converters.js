@@ -4,8 +4,8 @@ import fs from 'fs'
 const filePath = ''
 
 let content = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
-let tcxContent = Tcx.ConvertFromNikeActivity({data:content})
+let tcxContent = Tcx.ConvertFromNikeActivity({data:content.data})
 fs.writeFileSync(filePath+'.tcx', tcxContent, {encoding:'utf-8'})
 
-let gpxContent = Gpx.ConvertFromNikeActivity({data:content})
+let gpxContent = Gpx.ConvertFromNikeActivity({data:content.data})
 fs.writeFileSync(filePath+'.gpx', gpxContent, {encoding:'utf-8'})
