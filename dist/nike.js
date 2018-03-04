@@ -120,17 +120,16 @@ var NikeClient = exports.NikeClient = function () {
   }, {
     key: 'login',
     value: function login(email, password) {
-      var uri = 'https://unite.nike.com/login?appVersion=358' + '&experienceVersion=308&uxid=com.nike.commerce.nikedotcom.web' + '&locale=en_US&backendEnvironment=identity&browser=Google%20Inc.&os=undefined' + '&mobile=false&native=false&visit=1&visitor=' + (0, _v2.default)();
+      var uri = 'https://unite.nike.com/login?appVersion=404' + '&experienceVersion=337&uxid=com.nike.commerce.nikedotcom.web' + '&locale=en_US&backendEnvironment=prd&browser=Google%20Inc.&os=undefined' + '&mobile=false&native=false&visit=1&visitor=' + (0, _v2.default)();
       var data = {
         'username': email,
         'password': password,
-        'keepMeLoggedIn': true,
         'client_id': 'QH8exE5gyCCyR0HbcQRRWklauH89tnQG',
         'ux_id': 'com.nike.commerce.nikedotcom.web',
         'grant_type': 'password'
       };
       var that = this;
-      return this._httpClient.Post(uri, { Referer: "https://awr.svs.nike.com/activity/login" }, data).then(function (data) {
+      return this._httpClient.Post(uri, { Referer: "https://awr.svs.nike.com/activity/login", Origin: "https://awr.svs.nike.com" }, data).then(function (data) {
         that.authData = JSON.parse(data);
         return Promise.resolve(that.authData);
       }).catch(function (err) {
